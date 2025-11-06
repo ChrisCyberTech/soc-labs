@@ -73,15 +73,3 @@ This lab proves:
 - How `ForwardedEvents` acts as a staging log for SIEM ingestion
 
 ---
-
-## 📂 Folder Structure
-
-soc-lab-2-wef-setup/
-│── README.md
-│── exports/ # (placeholder for future log exports)
-└── screenshots/
-├── DC01/
-└── Workstation01/
-yaml
-
----
