@@ -78,10 +78,10 @@ This lab proves:
 
 soc-lab-2-wef-setup/
 │── README.md
-│── exports/ # (empty placeholder for future log exports)
-└── screenshots/
-├── DC01/
-└── Workstation01/
+ │── exports/ # (empty placeholder for future log exports)
+ └── screenshots/
+ ├── DC01/
+ └── Workstation01/
 
 yaml
 
