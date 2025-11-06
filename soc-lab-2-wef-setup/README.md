@@ -77,11 +77,11 @@ This lab proves:
 ## 📂 Folder Structure
 
 soc-lab-2-wef-setup/
-```│── README.md```
-```│── exports/ # (empty placeholder for future log exports)```
-```└── screenshots/```
-```├── DC01/```
-```└── Workstation01/```
+│── README.md```
+│── exports/ # (empty placeholder for future log exports)```
+└── screenshots/```
+├── DC01/```
+└── Workstation01/```
 
 yaml
 
