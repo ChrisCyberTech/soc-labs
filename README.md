@@ -1,30 +1,32 @@
 # 🛡️ SOC Labs – Student Portfolio
 
-This repository contains a collection of hands-on Security Operations Center (SOC) labs I’m completing as part of my beginner cybersecurity journey. Each lab focuses on one practical SOC skill at a time — using real Windows hosts, Sysmon, Event Forwarding (WEF), and eventually a SIEM.
+This repository contains a collection of hands-on Security Operations Center (SOC) labs that I’m completing as part of my beginner cybersecurity journey. Each lab focuses on one practical SOC skill — using real Windows hosts, Sysmon, Event Forwarding (WEF), and SIEM integration inside a virtual lab environment.
 
-The goal is to learn how to collect, forward, and analyze security logs in a small, controlled lab environment using virtual machines.
+The goal is to learn how to collect, centralize, and analyze security logs in a controlled domain setup using virtual machines.
 
 ---
 
 ## 🔍 Lab Overview
 
-| Lab # | Title                                    | Description                                                                                     |
-|-------|------------------------------------------|-------------------------------------------------------------------------------------------------|
-| 1     | [Local Sysmon Setup](./soc-lab-1-sysmon) | Deployed Sysmon on Workstation01 and explored local event logging under `Microsoft-Windows-Sysmon/Operational` |
-| 2     | [WEF + Sysmon (Forwarding)](./soc-lab-2-wef) | Set up Windows Event Forwarding (WEF) from Workstation01 ➜ DC01 to collect and centralize Sysmon logs |
-| 3     | SIEM Integration *(coming soon)*          | Forwarded Windows/Sysmon logs into a free SIEM for event analysis and detection writing         |
+| Lab # | Title                                               | Description                                                                                          | Status  |
+|-------|-----------------------------------------------------|------------------------------------------------------------------------------------------------------|---------|
+| 1     | [Local Sysmon Setup](./soc-lab-1-sysmon)            | Installed Sysmon on Workstation01 and explored local operational logs                               | ✅ Done |
+| 2     | [WEF + Sysmon (Forwarding)](./soc-lab-2-wef)        | Configured Windows Event Forwarding to collect Sysmon logs from Workstation01 ➜ DC01                | ✅ Done |
+| 3     | [WEF + SIEM Integration (Splunk)](./soc-lab-3-siem-wef) | Ingested forwarded Security and Sysmon logs into Splunk index `wef` for querying and detection      | ✅ Done |
+| 4     | Network Traffic Analysis *(coming soon)*            | Use Wireshark + Nmap to investigate and analyze suspicious network traffic                          | 🔜 Next |
 
 ---
 
 ## 🧰 Tools & Technologies
 
 - **Windows 11 Pro** (Workstation01 VM)
-- **Windows Server 2025** (DC01 VM)
-- **UTM Virtualization** on macOS (ARM-based)
+- **Windows Server 2025 / DC01**
+- **UTM Virtualization** (ARM-based macOS)
 - **Sysmon v15**
 - **Windows Event Forwarding / Collector (WEC)**
-- **PowerShell** for validation and log queries
-- *(Later) SIEM tools like Wazuh, ELK, or Splunk Free*
+- **Splunk Enterprise + Universal Forwarder**
+- **PowerShell** for system + event validation
+- *(Future)* Network tools: **Wireshark**, **Nmap**
 
 ---
 
@@ -38,25 +40,27 @@ The goal is to learn how to collect, forward, and analyze security logs in a sma
 ├── soc-lab-2-wef
 │   ├── README.md
 │   └── screenshots/
-├── soc-lab-3-siem (coming soon)
-└── README.md
+├── soc-lab-3-siem-wef
+│   ├── README.md
+│   └── screenshots/
+└── README.md  ← (this file)
 🧠 Learning Reflection
-Each lab will include a small reflection about:
+Each lab includes a personal reflection section:
 
-What I learned 🚀
+🚀 What I learned
 
-What broke 🔧
+🔧 What broke
 
-What I want to try next 🔍
+🔍 What I want to try next
+
+I’m building this portfolio to gain practical cybersecurity experience and prepare for an entry-level role, starting with help desk and working toward SOC Analyst.
 
 📌 Next Up
-✅ Lab 2 complete
-🔜 Lab 3 – Build a free SIEM, ingest forwarded logs, and write detections
-🧪 Future ideas: Windows Event Filtering, Threat Hunting, Sigma Rules, etc.
+✅ Lab 3 complete (SIEM integration)
 
-Repository maintained by Chris Mejia (GitHub: ChrisCyberTech)
-Created as part of hands-on cybersecurity experience and continuous learning.
+🔜 Lab 4 – Network traffic analysis with Wireshark/Nmap
 
-yaml
+🧪 Future ideas: Threat hunting with Sigma, Event Filtering, Incident Response logs
 
----
+Maintained by:
+📌 Chris Mejia (GitHub: ChrisCyberTech)
