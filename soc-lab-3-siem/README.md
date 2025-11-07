@@ -70,13 +70,15 @@ This lab demonstrates skills in **endpoint logging, centralized log forwarding, 
 
 | # | Screenshot | Description |
 |---|------------|-------------|
-| 1 | `L3-01_Splunk_DataInputs_Page.png` | Verified Splunk Data Inputs for `WinEventLog://ForwardedEvents` |
-| 2 | `L3-04_inputs_conf_AfterEdit.png` | Modified `inputs.conf` to accept forwarded Windows logs |
-| 3 | `L3-05_Splunk_Restart_Services.png` | Restarted Splunk services after config change |
-| 4 | `L3-06_Splunk_Search_Initial_Events.png` | Initial Sysmon events appearing in Splunk |
-| 5 | `L3-07_Sysmon_EventID1_Visible.png` | Sysmon Event ID 1 successfully forwarded |
-| 6 | `L3-08_Splunk_EventCode_Table.png` | Event counts grouped by `EventCode` in Splunk |
-| 7 | `L3-08_WEF_4624_4625_4634_Splunk_Stats.png` | Successful logon/logoff events: 4624, 4625, 4634 |
+| 1 | ![Splunk Data Inputs](./screenshots/L3-01_Splunk_DataInputs_Page.png) | Verified Splunk Data Inputs for `WinEventLog://ForwardedEvents` |
+| 2 | ![inputs.conf After Edit](./screenshots/L3-04_inputs_conf_AfterEdit.png) | Modified `inputs.conf` to accept forwarded Windows logs |
+| 3 | ![Splunk Restart Services](./screenshots/L3-05_Splunk_Restart_Services.png) | Restarted Splunk services after config change |
+| 4 | ![Initial Events Search](./screenshots/L3-06_Splunk_Search_Initial_Events.png) | Initial Sysmon events appearing in Splunk |
+| 5 | ![Sysmon Event ID 1](./screenshots/L3-07_Sysmon_EventID1_Visible.png) | Sysmon Event ID 1 successfully forwarded |
+| 6 | ![EventCode Table](./screenshots/L3-08_Splunk_EventCode_Table.png) | Event counts grouped by `EventCode` in Splunk |
+| 7 | ![WEF Security Logon Events](./screenshots/L3-08_WEF_4624_4625_4634_Splunk_Stats.png) | Successful logon/logoff events: 4624, 4625, 4634 |
+
+---
 
 ---
 
