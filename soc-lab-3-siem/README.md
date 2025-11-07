@@ -1,62 +1,135 @@
-# SOC Lab 3 – SIEM Integration with Splunk
+# SOC Lab 3 – Windows Event Forwarding (WEF) + Splunk SIEM Integration
 
-## 🎯 Objective
+## 📌 Overview
 
-In this lab, I configured a basic SIEM environment using **Splunk Free** to ingest, index, and analyze Windows Sysmon logs that were forwarded using Windows Event Forwarding (WEF) in Lab 2.
+In this lab, I configured **Windows Event Forwarding (WEF)** to collect **Sysmon** and **Security Logon Events** (IDs: `4624`, `4625`, `4634`) from a domain workstation (`WORKSTATION01`) and forward them to a **central Windows Event Collector (DC01)**. These logs were then ingested into **Splunk** using the **Universal Forwarder**, creating a searchable dataset under `index=wef`.
 
-This setup simulates a real SOC workflow where log data from endpoints is centralized in a SIEM for security monitoring, detection engineering, and incident investigation.
-
----
-
-## 🧱 Lab Environment
-
-| Device        | Purpose                             | OS / Version              |
-|---------------|-------------------------------------|---------------------------|
-| `DC01`        | Domain Controller, Event Collector  | Windows Server 2022       |
-| `Workstation01` | Sysmon Event Source                  | Windows 11 Pro            |
-| `SIEM01`      | Splunk Server / Indexer             | Splunk Free on Windows    |
+This lab demonstrates skills in **endpoint logging, centralized log forwarding, SIEM integration, and event investigation** — core competencies for SOC Analyst roles.
 
 ---
 
-## 🛠️ Lab Tasks (High-Level)
+## 🏗️ Architecture Diagram
 
-1. Downloaded and installed Splunk Free on `SIEM01`
-2. Configured Splunk receiver/index (`sysmon_index`)
-3. Set up Splunk to monitor the `ForwardedEvents` Windows log
-4. Created basic Splunk search queries for Sysmon events
-5. Confirmed daily log ingestion from `Workstation01` via WEF
-6. (Optional) Built a starter Sysmon dashboard inside Splunk
+```
+┌───────────────────────────┐
+│  WORKSTATION01            │
+│  • Sysmon (Event ID 1)    │
+│  • Security Logs (4624...)│
+└─────────────┬─────────────┘
+              │  (WEF HTTP 5985)
+              ▼
+┌───────────────────────────┐
+│  DC01 (WEC + Splunk UF)   │
+│  • Forwards to Splunk     │
+│  • Subscriptions enabled  │
+└─────────────┬─────────────┘
+              │
+              ▼
+┌───────────────────────────┐
+│  Splunk Enterprise (DC01) │
+│  • index=wef              │
+│  • Search & SIEM queries  │
+└───────────────────────────┘
+```
 
 ---
 
-## 📂 Repository Structure
+## 🛠️ Tools & Technologies
 
-```bash
-soc-lab-3-siem/
-├── README.md           # This file
-├── configs/            # Splunk configs (inputs.conf, props.conf, etc.)
-├── queries/            # .spl queries used in lab
-├── dashboards/         # JSON exports of Splunk dashboards (if created)
-├── notes/              # Written steps, troubleshooting, etc.
-└── screenshots/
-    ├── DC01/           # Screenshots from the domain controller
-    ├── Workstation01/  # Screenshots from the endpoint
-    └── SIEM/           # Screenshots from the Splunk server
-📸 Screenshots (To Add)
-#	File Name	Description
-1	SOC3-01_SIEM01_SplunkInstall.png	Proof of Splunk installation
-2	SOC3-02_SIEM01_DataInputConfigured.png	Data input for ForwardedEvents enabled in Splunk
-3	SOC3-03_DC01_ForwardedEvents_Log.png	DC01 showing Sysmon logs still arriving via WEF
-4	SOC3-04_SIEM01_SplunkSysmonSearch.png	Splunk query showing Sysmon logs from Workstation01
-5	SOC3-05_SIEM01_SimpleDashboard.png	Optional Splunk dashboard (Process Create, DNS, etc.)
+| Tool/Service         | Purpose |
+|----------------------|---------|
+| **Sysmon**           | Endpoint event visibility (Process creation, network, etc.) |
+| **Windows Event Forwarding (WEF)** | Collect and centralize logs from domain clients |
+| **Splunk Enterprise (Local Install)** | SIEM for indexing and searching logs |
+| **Splunk Universal Forwarder** | Sends WEF events from DC01 to Splunk |
+| **PowerShell**       | Service verification, event testing, gpupdate, etc. |
 
-🧾 Notes
-Splunk Free has a 500MB/day ingest limit, which is fine for lab use.
+---
 
-Make sure to adjust your inputs.conf to point to the correct Windows event log.
+## 🎯 Objectives
 
-🔗 Related Labs
-SOC Lab 1 – Sysmon Install
+- ✅ Set up WEF subscription to collect Sysmon + Security logs
+- ✅ Configure Splunk to ingest forwarded Windows logs
+- ✅ Verify log delivery end-to-end (Source → WEC → Splunk)
+- ✅ Search and analyze logon/logoff events (`4624`, `4625`, `4634`) in Splunk
 
-SOC Lab 2 – Windows Event Forwarding
+---
 
+## 🔄 Process Summary
+
+1. **Enabled Data Inputs in Splunk**: `WinEventLog://ForwardedEvents`
+2. **Edited `inputs.conf`** to monitor forwarded Windows logs
+3. **Restarted Splunk Services** to apply changes
+4. **Built WEF subscription on DC01** for Sysmon + Security channels
+5. **Forced GP Update + Subscription Sync** on WORKSTATION01
+6. **Verified forwarded events via PowerShell and Splunk**
+
+---
+
+## 🖼️ Screenshots
+
+| # | Screenshot | Description |
+|---|------------|-------------|
+| 1 | `L3-01_Splunk_DataInputs_Page.png` | Verified Splunk Data Inputs for `WinEventLog://ForwardedEvents` |
+| 2 | `L3-04_inputs_conf_AfterEdit.png` | Modified `inputs.conf` to accept forwarded Windows logs |
+| 3 | `L3-05_Splunk_Restart_Services.png` | Restarted Splunk services after config change |
+| 4 | `L3-06_Splunk_Search_Initial_Events.png` | Initial Sysmon events appearing in Splunk |
+| 5 | `L3-07_Sysmon_EventID1_Visible.png` | Sysmon Event ID 1 successfully forwarded |
+| 6 | `L3-08_Splunk_EventCode_Table.png` | Event counts grouped by `EventCode` in Splunk |
+| 7 | `L3-08_WEF_4624_4625_4634_Splunk_Stats.png` | Successful logon/logoff events: 4624, 4625, 4634 |
+
+---
+
+## 🔧 Commands Used
+
+### ✅ WEF Subscription Status (DC01)
+```powershell
+# List subscriptions
+wecutil es
+
+# Review subscription XML
+wecutil gs SOC2-WEF /f:xml
+
+# View runtime status
+wecutil gr SOC2-WEF
+```
+
+### ✅ Force GP & Subscription Refresh (WORKSTATION01)
+```powershell
+gpupdate /force
+schtasks /run /tn "\Microsoft\Windows\EventCollector\SubscriptionManager"
+Restart-Service Wecsvc
+```
+
+### ✅ Validate Forwarded Logs (DC01)
+```powershell
+Get-WinEvent -LogName ForwardedEvents -MaxEvents 20 |
+  Select TimeCreated, Id, MachineName
+```
+
+### ✅ Splunk Queries
+```
+index=wef source="WinEventLog:ForwardedEvents"
+| stats count by host EventCode
+```
+
+---
+
+## ✅ Result Verification
+
+- `wecutil gr SOC2-WEF` confirmed forwarded events from `WORKSTATION01`
+- Sysmon Event ID 1 appeared in `index=wef` in Splunk
+- Security logons (4624, 4634) visible in both PowerShell and Splunk
+- End-to-end flow: WORKSTATION01 → WEF → DC01 → Splunk
+
+---
+
+## 🧠 What I Learned
+
+- Configured Windows Event Forwarding in a domain environment
+- Understood Splunk’s data input, index, and search pipeline
+- Gained experience validating logs via PowerShell and Splunk SPL
+- Learned how to troubleshoot WEF subscriptions and log delivery
+- Built SIEM visibility for offensive security telemetry (Sysmon) and identity events
+
+---
