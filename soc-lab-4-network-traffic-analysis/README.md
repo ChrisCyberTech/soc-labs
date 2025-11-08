@@ -126,39 +126,56 @@ All screenshots are stored under `./screenshots/`:
 
 ### ✅ Workstation network info & ping
 ```powershell
+# Show IP configuration
 ipconfig
+
+# Test connectivity to DC01
 ping 192.168.64.4
 ✅ Host discovery
 powershell
 Copy code
+# Host discovery (ARP/ICMP)
 nmap -sn 192.168.64.4
 ✅ SYN port scan
 powershell
 Copy code
+# SYN scan (privileged) for ports 1-1024
 nmap -sS 192.168.64.4 -p 1-1024
-✅ Service/version detection
+✅ Service / version detection
 powershell
 Copy code
+# Probe services and save output to Desktop
 nmap -sV 192.168.64.4 | Tee-Object -FilePath C:\Users\Administrator\Desktop\04-11-nmap-sV.txt
 ✅ Result Verification
-ARP and SYN packets showed DC01 is reachable and responding
+Host reachability
 
-Port 5985 (WinRM) responded with SYN/ACK and showed Microsoft-HTTPAPI/2.0 in header
+ARP and ICMP traffic show DC01 (192.168.64.4) is up and reachable.
 
-RST packets confirmed closed ports during scan
+Open port confirmation
 
-Service detection scan confirmed multiple AD-related services (LDAP, SMB, Kerberos)
+SYN → SYN/ACK observed for port 5985 (WinRM) — confirms the port is open.
 
-.pcapng captured on Windows was successfully opened and analyzed via macOS Wireshark
+Packet header contained Microsoft-HTTPAPI/2.0, matching WinRM fingerprint.
+
+Closed ports
+
+Multiple scanned ports returned RST from the target — confirms those ports are closed.
+
+Service fingerprinting
+
+nmap -sV results match packet-level evidence (HTTP responses on 5985 and other AD-related services).
+
+Cross-platform validation
+
+.pcapng captured on Windows was moved and opened in macOS Wireshark for offline analysis and verification.
 
 🧠 What I Learned
-How SYN scans work vs. full TCP connections
+Difference between SYN scans and full TCP connections (how SYN, SYN/ACK, ACK, RST indicate port state).
 
-How open and closed ports can be confirmed via packet analysis
+How to confirm open vs closed ports using packet evidence (SYN/ACK = open; RST = closed).
 
-How to capture and interpret ARP, SYN/ACK, and RST in Wireshark
+How to capture and interpret ARP, SYN, SYN/ACK, and RST packets in Wireshark.
 
-How Nmap's service detection (-sV) reveals useful attacker intel
+How Nmap -sV service detection correlates with packet-level banner information (Microsoft-HTTPAPI/2.0 for WinRM).
 
-Basics of validating remote access surface (like WinRM) using packet evidence
-
+The security implications of exposed services (example: WinRM) and basic mitigation ideas (restrict access, use HTTPS, monitor auth events).
