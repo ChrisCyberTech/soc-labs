@@ -129,39 +129,38 @@ ping 192.168.64.4
 🟡 Host discovery (Nmap ping scan)
 powershell
 Copy code
-# Host discovery (ARP/ICMP)
+# ARP/ICMP host discovery
 nmap -sn 192.168.64.4
 🔵 SYN port scan (ports 1–1024)
 powershell
 Copy code
-# SYN scan (privileged) for ports 1-1024
+# SYN scan of well-known ports
 nmap -sS 192.168.64.4 -p 1-1024
 🟣 Service / version detection (save output)
 powershell
 Copy code
-# Service/version detection and save to file
+# Probe services and write output to a text file
 nmap -sV 192.168.64.4 | Tee-Object -FilePath C:\Users\Administrator\Desktop\04-11-nmap-sV.txt
 ✅ Result Verification
-Host reachability — ARP and ICMP traffic show DC01 (192.168.64.4) is up and reachable.
+Host reachability: ARP + ICMP prove DC01 (192.168.64.4) is up.
 
-Open port confirmation — SYN → SYN/ACK observed for port 5985 (WinRM) — confirms the port is open.
+Open port: 5985/TCP returned SYN/ACK → port is OPEN (WinRM).
 
-Banner evidence — Packet header contains Microsoft-HTTPAPI/2.0, matching WinRM fingerprint.
+Banner evidence: Packet header shows Microsoft-HTTPAPI/2.0 (WinRM).
 
-Closed ports — Several scanned ports returned RST from the target — confirms those ports are closed.
+Closed ports: Multiple targets responded with RST → CLOSED.
 
-Service fingerprinting — nmap -sV results matched packet-level evidence (HTTP responses on 5985 and other AD services).
+Consistency: Packet behavior matches Nmap results.
 
-Cross-platform validation — .pcapng captured on Windows was moved and opened in macOS Wireshark for offline analysis.
+Portability: .pcapng captured on Windows, opened on macOS Wireshark.
 
 🧠 What I Learned
-The difference between SYN scans and full TCP handshakes (how SYN, SYN/ACK, ACK, RST indicate port state).
+Difference between a SYN scan and a full TCP handshake.
 
-How to confirm open vs closed ports using packet evidence (SYN/ACK = open; RST = closed).
+How to confirm open vs. closed ports from packets (SYN/ACK vs. RST).
 
-How to capture and interpret ARP, SYN, SYN/ACK, and RST packets in Wireshark.
+How ARP, SYN, SYN/ACK, and RST look in Wireshark.
 
-How nmap -sV service detection correlates with packet-level banner information (example: Microsoft-HTTPAPI/2.0 for WinRM).
+How nmap -sV fingerprints correlate with packet banners (e.g., HTTPAPI/2.0).
 
-Why exposed services like WinRM, SMB, and LDAP matter in attack-surface mapping and basic mitigation strategies.
-
+Why exposed services (WinRM, SMB, LDAP) matter for attack surface mapping.
