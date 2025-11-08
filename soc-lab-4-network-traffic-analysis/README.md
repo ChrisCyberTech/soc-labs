@@ -117,42 +117,49 @@ All screenshots are stored under `./screenshots/`:
 
 ---
 
-🔧 Commands Used
-🟢 Workstation network info & ping
+# 🔧 Commands Used
 
-ipconfig — show IP configuration
+---
 
-ping 192.168.64.4 — verify DC01 is reachable
+### 🟢 Workstation network info & ping
+`ipconfig` — show IP configuration  
+`ping 192.168.64.4` — verify DC01 is reachable  
 
-🟡 Host discovery (Nmap ping scan)
+---
 
-nmap -sn 192.168.64.4 — ARP/ICMP discovery scan
+### 🟡 Host discovery (Nmap ping scan)
+`nmap -sn 192.168.64.4` — ARP/ICMP discovery scan  
 
-🔵 SYN port scan (ports 1–1024)
+---
 
-nmap -sS 192.168.64.4 -p 1-1024 — half-open SYN scan
+### 🔵 SYN port scan (ports 1–1024)
+`nmap -sS 192.168.64.4 -p 1-1024` — half-open SYN scan  
 
-🟣 Service & version detection
+---
 
-nmap -sV 192.168.64.4 | Tee-Object -FilePath C:\Users\Administrator\Desktop\04-11-nmap-sV.txt
-→ saves scan output to file
+### 🟣 Service & version detection (saved to file)
+`nmap -sV 192.168.64.4 | Tee-Object -FilePath C:\Users\Administrator\Desktop\04-11-nmap-sV.txt`  
+→ saves scan output to file for evidence  
 
-✅ Result Verification
-Check	Evidence
-Host reachable	ARP + ICMP reply from 192.168.64.4
-Open port	5985/TCP returned SYN/ACK → OPEN
-Service banner	Packet shows Microsoft-HTTPAPI/2.0 → WinRM
-Closed ports	Responded with RST flags
-Match to Nmap	Packet data matches nmap -sV results
-Cross-platform	.pcapng opened on macOS Wireshark
-🧠 What I Learned
+---
 
-How SYN scans work vs full TCP handshake
+## ✅ Result Verification
 
-How to confirm open vs closed ports from packet flags
+| Check | Evidence |
+|-------|----------|
+| Host reachable | ARP + ICMP replies from `192.168.64.4` |
+| Open port found | `5985/TCP` replied with **SYN/ACK → OPEN** (WinRM) |
+| Service banner | Packet showed `Microsoft-HTTPAPI/2.0` |
+| Closed ports | Responded with **RST** flags |
+| Matches Nmap | Packet data aligned with `nmap -sV` scan output |
+| Cross-platform | `.pcapng` opened and analyzed on macOS Wireshark |
 
-What ARP, SYN, SYN/ACK, and RST look like in Wireshark
+---
 
-How nmap -sV fingerprints map to real packet banners
+## 🧠 What I Learned
 
-Why exposed services (WinRM, SMB, LDAP) increase attack surface
+- Difference between SYN scan vs full TCP handshake  
+- How to confirm open vs closed ports using packet flags  
+- How ARP, SYN, SYN/ACK, and RST packets appear in Wireshark  
+- How `nmap -sV` fingerprints correlate with protocol banners in traffic  
+- Why exposed services like WinRM, SMB, and LDAP matter for attack surface mapping  
