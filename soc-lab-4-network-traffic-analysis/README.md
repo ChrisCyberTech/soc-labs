@@ -63,13 +63,17 @@ Workstation01 IP details.
 
 Ping shows DC01 is reachable (host up).
 
-Step 2 — Start Wireshark capture (Windows VM)
+---
+
+## Step 2 — Start Wireshark capture (Windows VM)
 What I did: start a live capture on the VM interface that sees traffic to/from DC01.
 
 
 Wireshark capturing on Workstation01 — waiting for scan traffic.
 
-Step 3 — Host discovery (nmap -sn) — ARP observed
+---
+
+## Step 3 — Host discovery (nmap -sn) — ARP observed
 Command:
 
 powershell
@@ -81,11 +85,13 @@ Why: quick host discovery; on local LAN this often uses ARP and may show ARP req
 
 ARP frames confirm host discovery — DC01 replies to ARP, proving it is up.
 
-Step 4 — SYN port scan (nmap -sS) — send SYNs to ports
+---
+
+## Step 4 — SYN port scan (nmap -sS) — send SYNs to ports
 Command:
 
 powershell
-Copy code
+
 nmap -sS 192.168.64.4 -p 1-1024
 Why: stealthy SYN scan to detect open ports (SYN → SYN/ACK = open; SYN → RST = closed; no reply = filtered).
 
@@ -102,31 +108,37 @@ ip.dst == 192.168.64.4 and tcp.flags.syn == 1 and tcp.flags.ack == 0
 
 Shows outbound SYN packets from scanner to DC01.
 
-Step 5 — Confirm closed ports (RST responses)
+---
+
+## Step 5 — Confirm closed ports (RST responses)
 What to look for: closed ports reply with RST to the scanner's SYN.
 
 Filter:
 
 ini
-Copy code
+
 ip.src == 192.168.64.4 and tcp.flags.reset == 1
 
 RST packets from DC01 indicate closed ports.
 
-Step 6 — Confirm open port via SYN/ACK (example: 5985 WinRM)
+---
+
+## Step 6 — Confirm open port via SYN/ACK (example: 5985 WinRM)
 What to look for: SYN from scanner, then SYN/ACK from DC01 — proof the port is open.
 
 Filter to show SYN/ACK replies:
 
 ini
-Copy code
+
 ip.src == 192.168.64.4 and tcp.flags.syn == 1 and tcp.flags.ack == 1
 
 This packet shows SYN/ACK from DC01 → confirm open port (5985).
 
 Interpretation: The packet details show Src Port: 5985 → service running on TCP/5985.
 
-Step 7 — Service/version detection (nmap -sV)
+---
+
+## Step 7 — Service/version detection (nmap -sV)
 Command:
 
 powershell
@@ -143,7 +155,9 @@ Key nmap -sV findings (excerpt):
 
 Other AD-related ports (DNS, Kerberos, LDAP, SMB) open.
 
-Step 8 — Capture service-level traffic in Wireshark
+---
+
+## Step 8 — Capture service-level traffic in Wireshark
 Filter used while -sV ran:
 
 ini
@@ -157,12 +171,13 @@ Shows service probes and HTTP-like WinRM responses.
 
 Expanded packet shows Microsoft-HTTPAPI/2.0 header — confirms WinRM service fingerprint.
 
-Step 9 — Save the capture (.pcapng) and move for analysis
+---
+
+## Step 9 — Save the capture (.pcapng) and move for analysis
 Action: stop the capture and save the packet trace.
 
 Saved file:
 
-Copy code
 evidence/Lab4_NMapScan_192.168.64.4_2025-11-07.pcapng
 
 Saved .pcapng before transfer — evidence of the capture file.
@@ -171,6 +186,8 @@ Open the same .pcapng on macOS Wireshark for offline review:
 
 
 Cross-platform analysis — capture opened on macOS for deeper inspection.
+
+---
 
 Findings (summary)
 Ports/services of interest (from nmap -sV & packet proof):
