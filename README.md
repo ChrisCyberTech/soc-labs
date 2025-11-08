@@ -49,6 +49,10 @@ The goal is to learn how to collect, centralize, and analyze security logs in a 
 ├── soc-lab-4-wireshark-nmap
 │   ├── README.md
 │   └── screenshots/
+│ 
+├── soc-lab-5-Incident investigation + response using Windows logs
+│   ├── README.md
+│   └── screenshots/
 │
 └── README.md   ← main index file
 🧠 Learning Reflection Format (per lab)
@@ -73,7 +77,7 @@ Each lab includes a reflection section:
 | ✅ | Lab 2 | Windows Event Forwarding (WEF) |
 | ✅ | Lab 3 | Splunk SIEM ingestion |
 | ✅ | Lab 4 | Network traffic analysis (Wireshark + Nmap) |
-| 🔜 | Lab 5 | TBD (next lab) |
+| 🔜 | Lab 5 | Incident investigation + response using Windows logs |
 
 ---
 
