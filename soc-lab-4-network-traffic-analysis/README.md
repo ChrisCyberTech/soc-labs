@@ -120,7 +120,7 @@ All screenshots are stored under `./screenshots/`:
 ## 🔧 Commands Used
 
 ### 🟢 Workstation network info & ping
-```powershell
+```powershell```
 # Show IP configuration
 ipconfig
 
