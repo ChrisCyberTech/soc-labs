@@ -86,6 +86,7 @@ All screenshots are stored under `./screenshots/`:
 | 15 | [04-12-wireshark-ip-target.png](./screenshots/04-12-wireshark-ip-target.png) | Filtering for only DC01 traffic |
 | 16 | [04-12-wireshark-packet-details-svc.png](./screenshots/04-12-wireshark-packet-details-svc.png) | `Microsoft HTTPAPI` header (WinRM) |
 | 17 | [04-13-wireshark-macos-pcap-open.png](./screenshots/04-13-wireshark-macos-pcap-open.png) | `.pcapng` file opened on macOS |
+[04-03-nmap-version.png](./screenshots/04-03-nmap-version.png)
 
 ---
 
