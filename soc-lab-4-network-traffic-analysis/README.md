@@ -1,88 +1,131 @@
-# 🧪 Lab 4 – Network Traffic Analysis with Wireshark + Nmap
+# SOC Lab 4 – Network Traffic Analysis with Wireshark + Nmap
 
-This lab focused on capturing and analyzing basic network traffic using **Wireshark** and **Nmap**. I scanned a Windows domain controller (`DC01`) from my workstation VM and verified the results through both command-line output and packet-level evidence.
+## 📌 Overview
 
----
+In this lab, I used **Nmap** to scan an Active Directory Domain Controller (`DC01`) from a Windows workstation (`WORKSTATION01`) and captured the traffic using **Wireshark**. Both **SYN scan (`-sS`)** and **service detection scan (`-sV`)** were used while analyzing the resulting traffic to determine open/closed ports and fingerprint services.
 
-## 🎯 Objective
-
-- Perform a port scan against `DC01` (`192.168.64.4`) using Nmap.
-- Capture the traffic using Wireshark on the scanning system.
-- Verify open and closed ports with packet-level evidence.
-- Save the `.pcapng` file and review it on macOS Wireshark.
+This lab demonstrates **packet-level validation of port scans**, cross-platform network traffic analysis (Windows to macOS), and foundational SOC skills including **OSINT on services, understanding remote attack surfaces (e.g., WinRM), and using packet inspection to validate discovery activity**.
 
 ---
 
-## 🧰 Tools Used
+## 🏗️ Architecture Diagram
 
-| Tool        | Platform      | Purpose               |
-|-------------|---------------|-----------------------|
-| Wireshark   | Windows & macOS | Packet capture & review |
-| Nmap        | Windows (VM)  | Host discovery, SYN scan, service version detection |
-| PowerShell  | Windows (VM)  | Running and exporting Nmap output |
-| UTM         | macOS         | Virtualization of Windows VMs |
+┌───────────────────────────┐
+│ WORKSTATION01 │
+│ • Nmap Scanner │
+│ • Wireshark Capture │
+└─────────────┬─────────────┘
+│ (Local subnet 192.168.64.0/24)
+▼
+┌───────────────────────────┐
+│ DC01 (Domain Controller) │
+│ • Open ports: 5985, 445, 389, etc. |
+│ • Services: WinRM, LDAP, SMB, Kerberos |
+└───────────────────────────┘
+
+markdown
+Copy code
 
 ---
 
-## 🛠️ Commands Used
+## 🛠️ Tools & Technologies
 
+| Tool/Service         | Purpose |
+|----------------------|---------|
+| **Nmap**             | Host discovery, SYN scan, service version scan |
+| **Wireshark**        | Real-time packet capture and analysis |
+| **PowerShell**       | Running Nmap and exporting scan results |
+| **UTM (macOS)**      | Virtualized Windows environment for lab |
+| **macOS (Host)**     | Analyzed saved `.pcapng` trace using Wireshark |
+
+---
+
+## 🎯 Objectives
+
+- ✅ Perform ARP/ICMP host discovery using `nmap -sn`
+- ✅ Execute SYN port scan (`nmap -sS`)
+- ✅ Use Wireshark to confirm SYN/ACK (open ports) and RST (closed ports)
+- ✅ Fingerprint running services using `nmap -sV`
+- ✅ Save packet capture file (`.pcapng`) and review it cross-platform
+- ✅ Validate open port **5985 (WinRM)** using both Nmap and packet details
+
+---
+
+## 🔄 Process Summary
+
+1. Installed Wireshark and Nmap on `WORKSTATION01`
+2. Verified network connectivity via `ping` and `ipconfig`
+3. Started Wireshark capture and ran `nmap -sn` (host discovery)
+4. Observed **ARP** packets confirming `DC01` is active
+5. Performed SYN scan and confirmed open ports via SYN/ACKs
+6. Used `nmap -sV` to gather service fingerprints (e.g., `Microsoft HTTPAPI`)
+7. Saved `.pcapng` and opened it on macOS Wireshark for validation
+
+---
+
+## 🖼️ Screenshots
+
+All screenshots are stored under `./screenshots/`:
+
+| #  | Screenshot | Description |
+|----|------------|-------------|
+| 01 | [04-01-wireshark-mac.png](./screenshots/04-01-wireshark-mac.png) | Wireshark installed on macOS |
+| 02 | [04-02-wireshark-win.png](./screenshots/04-02-wireshark-win.png) | Wireshark on Windows VM |
+| 03 | [04-03-nmap-version.png](./screenshots/04-03-nmap-version.png) | Nmap version output |
+| 04 | [04-04-workstation-ipconfig.png](./screenshots/04-04-workstation-ipconfig.png) | Workstation01 IP info |
+| 05 | [04-05-ping-dc01.png](./screenshots/04-05-ping-dc01.png) | Ping successful to DC01 |
+| 06 | [04-05-wireshark-live.png](./screenshots/04-05-wireshark-live.png) | Live capture started in Wireshark |
+| 07 | [04-06-nmap-sn.png](./screenshots/04-06-nmap-sn.png) | `nmap -sn` (host discovery) |
+| 08 | [04-07-wireshark-arp.png](./screenshots/04-07-wireshark-arp.png) | ARP response detected for DC01 |
+| 09 | [04-08-nmap-ss.png](./screenshots/04-08-nmap-ss.png) | `nmap -sS` (SYN scan) |
+| 10 | [04-08-pcap-saved.png](./screenshots/04-08-pcap-saved.png) | Saved `.pcapng` evidence |
+| 11 | [04-09-wireshark-syn-filter.png](./screenshots/04-09-wireshark-syn-filter.png) | SYN packets sent to DC01 |
+| 12 | [04-10-wireshark-rst-filter.png](./screenshots/04-10-wireshark-rst-filter.png) | RST packets from closed ports |
+| 13 | [04-10-wireshark-synack.png](./screenshots/04-10-wireshark-synack.png) | SYN/ACK for open port 5985 |
+| 14 | [04-11-nmap-sV.png](./screenshots/04-11-nmap-sV.png) | Output of `nmap -sV` |
+| 15 | [04-12-wireshark-ip-target.png](./screenshots/04-12-wireshark-ip-target.png) | Filtering for only DC01 traffic |
+| 16 | [04-12-wireshark-packet-details-svc.png](./screenshots/04-12-wireshark-packet-details-svc.png) | `Microsoft HTTPAPI` header (WinRM) |
+| 17 | [04-13-wireshark-macos-pcap-open.png](./screenshots/04-13-wireshark-macos-pcap-open.png) | `.pcapng` file opened on macOS |
+
+---
+
+## 🔧 Commands Used
+
+### ✅ Workstation network info & ping
 ```powershell
-# Confirm IP address
 ipconfig
-
-# Ping target
 ping 192.168.64.4
-
-# Host discovery
+✅ Host discovery
+powershell
+Copy code
 nmap -sn 192.168.64.4
-
-# SYN scan
+✅ SYN port scan
+powershell
+Copy code
 nmap -sS 192.168.64.4 -p 1-1024
-
-# Service/version scan
+✅ Service/version detection
+powershell
+Copy code
 nmap -sV 192.168.64.4 | Tee-Object -FilePath C:\Users\Administrator\Desktop\04-11-nmap-sV.txt
-📁 Screenshots
-All images are in ./screenshots/
+✅ Result Verification
+ARP and SYN packets showed DC01 is reachable and responding
 
-#	Filename	Description
-01	04-01-wireshark-mac.png	Wireshark installed on macOS
-02	04-02-wireshark-win.png	Wireshark installed on Windows VM
-03	04-03-nmap-version.png	Confirm Nmap version
-04	04-04-workstation-ipconfig.png	Workstation IP address
-05	04-05-ping-dc01.png	Successfully pinging DC01
-06	04-05-wireshark-live.png	Live capture in Wireshark
-07	04-06-nmap-sn.png	Nmap host discovery (-sn)
-08	04-07-wireshark-arp.png	ARP request/response in Wireshark
-09	04-08-nmap-ss.png	Nmap SYN scan (-sS)
-10	04-08-pcap-saved.png	Saved .pcapng file on Windows
-11	04-09-wireshark-syn-filter.png	SYN packets sent to DC01
-12	04-10-wireshark-rst-filter.png	RST packets from closed ports
-13	04-10-wireshark-synack.png	SYN/ACK packet from open port (5985)
-14	04-11-nmap-sV.png	Service version detection (-sV)
-15	04-12-wireshark-ip-target.png	Filtered traffic by target
-16	04-12-wireshark-packet-details-svc.png	HTTPAPI header for WinRM
-17	04-13-wireshark-macos-pcap-open.png	Pcap opened on macOS
+Port 5985 (WinRM) responded with SYN/ACK and showed Microsoft-HTTPAPI/2.0 in header
 
-📦 Evidence Files
-These files are in ./evidence/:
+RST packets confirmed closed ports during scan
 
-Lab4_NMapScan_192.168.64.4_2025-11-07.pcapng – Packet capture
+Service detection scan confirmed multiple AD-related services (LDAP, SMB, Kerberos)
 
-04-11-nmap-sV.txt – Raw service detection output
+.pcapng captured on Windows was successfully opened and analyzed via macOS Wireshark
 
-🔍 Findings (summary)
-Confirmed multiple open ports on DC01 including LDAP, SMB, DNS, Kerberos.
+🧠 What I Learned
+How SYN scans work vs. full TCP connections
 
-Port 5985 (WinRM) is open and responds with Microsoft HTTPAPI/2.0 → remote PowerShell is enabled.
+How open and closed ports can be confirmed via packet analysis
 
-Closed ports return RST packets (confirmed in Wireshark).
+How to capture and interpret ARP, SYN/ACK, and RST in Wireshark
 
-Service fingerprinting (-sV) matches packet header data (HTTP/1.1 200 + HTTPAPI).
+How Nmap's service detection (-sV) reveals useful attacker intel
 
-🛡️ Security Notes
-WinRM (5985) over HTTP can be abused if an attacker gets valid credentials. Best practice is to use 5986 (HTTPS) and restrict access to admins.
-
-Legacy ports like NetBIOS (139) should be disabled unless required.
-
-Critical services such as LDAP, Kerberos, and SMB should be monitored and kept internal-only.
+Basics of validating remote access surface (like WinRM) using packet evidence
 
