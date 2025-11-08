@@ -67,26 +67,58 @@ Copy code
 
 All screenshots are stored under `./screenshots/`:
 
-| #  | Screenshot | Description |
-|----|------------|-------------|
-| 01 | [04-01-wireshark-mac.png](./screenshots/04-01-wireshark-mac.png) | Wireshark installed on macOS |
-| 02 | [04-02-wireshark-win.png](./screenshots/04-02-wireshark-win.png) | Wireshark on Windows VM |
-| 03 | [04-03-nmap-version.png](./screenshots/04-03-nmap-version.png) | Nmap version output |
-| 04 | [04-04-workstation-ipconfig.png](./screenshots/04-04-workstation-ipconfig.png) | Workstation01 IP info |
-| 05 | [04-05-ping-dc01.png](./screenshots/04-05-ping-dc01.png) | Ping successful to DC01 |
-| 06 | [04-05-wireshark-live.png](./screenshots/04-05-wireshark-live.png) | Live capture started in Wireshark |
-| 07 | [04-06-nmap-sn.png](./screenshots/04-06-nmap-sn.png) | `nmap -sn` (host discovery) |
-| 08 | [04-07-wireshark-arp.png](./screenshots/04-07-wireshark-arp.png) | ARP response detected for DC01 |
-| 09 | [04-08-nmap-ss.png](./screenshots/04-08-nmap-ss.png) | `nmap -sS` (SYN scan) |
-| 10 | [04-08-pcap-saved.png](./screenshots/04-08-pcap-saved.png) | Saved `.pcapng` evidence |
-| 11 | [04-09-wireshark-syn-filter.png](./screenshots/04-09-wireshark-syn-filter.png) | SYN packets sent to DC01 |
-| 12 | [04-10-wireshark-rst-filter.png](./screenshots/04-10-wireshark-rst-filter.png) | RST packets from closed ports |
-| 13 | [04-10-wireshark-synack.png](./screenshots/04-10-wireshark-synack.png) | SYN/ACK for open port 5985 |
-| 14 | [04-11-nmap-sV.png](./screenshots/04-11-nmap-sV.png) | Output of `nmap -sV` |
-| 15 | [04-12-wireshark-ip-target.png](./screenshots/04-12-wireshark-ip-target.png) | Filtering for only DC01 traffic |
-| 16 | [04-12-wireshark-packet-details-svc.png](./screenshots/04-12-wireshark-packet-details-svc.png) | `Microsoft HTTPAPI` header (WinRM) |
-| 17 | [04-13-wireshark-macos-pcap-open.png](./screenshots/04-13-wireshark-macos-pcap-open.png) | `.pcapng` file opened on macOS |
-[04-03-nmap-version.png](./screenshots/04-03-nmap-version.png)
+## 🖼️ Screenshots
+
+### 01 — Wireshark installed on macOS  
+![Wireshark on macOS](./screenshots/04-01-wireshark-mac.png)
+
+### 02 — Wireshark on Workstation01 (Windows VM)  
+![Wireshark on Windows VM](./screenshots/04-02-wireshark-win.png)
+
+### 03 — Nmap version output  
+![Nmap version output](./screenshots/04-03-nmap-version.png)
+
+### 04 — Workstation01 IP information  
+![Workstation01 IP info](./screenshots/04-04-workstation-ipconfig.png)
+
+### 05 — Ping successful to DC01  
+![Ping successful to DC01](./screenshots/04-05-ping-dc01.png)
+
+### 06 — Live capture started in Wireshark  
+![Wireshark live capture](./screenshots/04-05-wireshark-live.png)
+
+### 07 — Host discovery (`nmap -sn`)  
+![nmap -sn host discovery](./screenshots/04-06-nmap-sn.png)
+
+### 08 — ARP response detected for DC01  
+![ARP response detected](./screenshots/04-07-wireshark-arp.png)
+
+### 09 — SYN scan (`nmap -sS`)  
+![nmap -sS SYN scan](./screenshots/04-08-nmap-ss.png)
+
+### 10 — Saved `.pcapng` evidence  
+![Saved pcap evidence](./screenshots/04-08-pcap-saved.png)
+
+### 11 — SYN packets sent to DC01  
+![SYN packets in Wireshark](./screenshots/04-09-wireshark-syn-filter.png)
+
+### 12 — RST packets from closed ports  
+![RST packet responses](./screenshots/04-10-wireshark-rst-filter.png)
+
+### 13 — SYN/ACK confirming open port (WinRM 5985)  
+![SYN/ACK open port](./screenshots/04-10-wireshark-synack.png)
+
+### 14 — Nmap service/version detection  
+![nmap -sV result](./screenshots/04-11-nmap-sV.png)
+
+### 15 — Filtered traffic showing DC01 packets  
+![IP traffic filter](./screenshots/04-12-wireshark-ip-target.png)
+
+### 16 — Service fingerprint showing `HTTPAPI` header  
+![Packet details for WinRM](./screenshots/04-12-wireshark-packet-details-svc.png)
+
+### 17 — `.pcapng` file opened in Wireshark on macOS  
+![pcap opened on macOS](./screenshots/04-13-wireshark-macos-pcap-open.png)
 
 ---
 
