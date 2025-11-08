@@ -37,30 +37,53 @@ The goal is to learn how to collect, centralize, and analyze security logs in a 
 ├── soc-lab-1-sysmon
 │   ├── README.md
 │   └── screenshots/
+│
 ├── soc-lab-2-wef
 │   ├── README.md
 │   └── screenshots/
-├── soc-lab-3-siem-wef
+│
+├── soc-lab-3-splunk
 │   ├── README.md
 │   └── screenshots/
-└── README.md  ← (this file)
-🧠 Learning Reflection
-Each lab includes a personal reflection section:
+│
+├── soc-lab-4-wireshark-nmap
+│   ├── README.md
+│   └── screenshots/
+│
+└── README.md   ← main index file
+🧠 Learning Reflection Format (per lab)
+Each lab includes a reflection section:
 
-🚀 What I learned
+Section	Purpose
+🚀 What I learned	Key takeaways and technical skills gained
+🔧 What broke	Issues and troubleshooting notes
+🔍 What I want to try next	Future improvements or follow-ups
 
-🔧 What broke
+📌 Roadmap
+Status	Lab	Focus Area
+✅	Lab 1	Sysmon local logging
+✅	Lab 2	Windows Event Forwarding (WEF)
+✅	Lab 3	Splunk SIEM ingestion
+✅	Lab 4	Network traffic analysis (Wireshark + Nmap)
+🔜	Lab 5	TBD (next lab)
 
-🔍 What I want to try next
+🧪 Future Ideas
+Threat hunting with Sigma rules
 
-I’m building this portfolio to gain practical cybersecurity experience and prepare for an entry-level role, starting with help desk and working toward SOC Analyst.
+Sysmon advanced config tuning
 
-📌 Next Up
-✅ Lab 3 complete (SIEM integration)
+PowerShell logging + SRUM artifacts
 
-🔜 Lab 4 – Network traffic analysis with Wireshark/Nmap
+Brute force + detection lab (RDP / WinRM)
 
-🧪 Future ideas: Threat hunting with Sigma, Event Filtering, Incident Response logs
+Active Directory attack paths (BloodHound)
 
-Maintained by:
-📌 Chris Mejia (GitHub: ChrisCyberTech)
+Incident response log workflow
+
+👤 Maintained by
+Chris Mejia — GitHub: ChrisCyberTech
+
+yaml
+Copy code
+
+---
