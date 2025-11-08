@@ -55,12 +55,12 @@ The goal is to learn how to collect, centralize, and analyze security logs in a 
 Each lab includes a reflection section:
 ```
 
-Section	Purpose
+## Section	Purpose
 🚀 What I learned	Key takeaways and technical skills gained
 🔧 What broke	Issues and troubleshooting notes
 🔍 What I want to try next	Future improvements or follow-ups
 
-📌 Roadmap
+```📌 Roadmap
 Status	Lab	Focus Area
 ✅	Lab 1	Sysmon local logging
 ✅	Lab 2	Windows Event Forwarding (WEF)
