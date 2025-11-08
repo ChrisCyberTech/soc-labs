@@ -23,9 +23,6 @@ This lab demonstrates **packet-level validation of port scans**, cross-platform 
 │ • Services: WinRM, LDAP, SMB, Kerberos |
 └───────────────────────────┘
 
-markdown
-Copy code
-
 ---
 
 ## 🛠️ Tools & Technologies
@@ -66,8 +63,6 @@ Copy code
 ## 🖼️ Screenshots
 
 All screenshots are stored under `./screenshots/`:
-
-## 🖼️ Screenshots
 
 ### 01 — Wireshark installed on macOS  
 ![Wireshark on macOS](./screenshots/04-01-wireshark-mac.png)
@@ -125,7 +120,7 @@ All screenshots are stored under `./screenshots/`:
 ## 🔧 Commands Used
 
 ### 🟢 Workstation network info & ping
-```powershell
+```powershell```
 # Show IP configuration
 ipconfig
 
@@ -133,15 +128,15 @@ ipconfig
 ping 192.168.64.4
 🟡 Host discovery (Nmap ping scan)
 powershell
-Copy code
+
 nmap -sn 192.168.64.4
 🔵 SYN port scan (ports 1–1024)
 powershell
-Copy code
+
 nmap -sS 192.168.64.4 -p 1-1024
 🟣 Service / version detection (saved to file)
 powershell
-Copy code
+
 nmap -sV 192.168.64.4 | Tee-Object -FilePath C:\Users\Administrator\Desktop\04-11-nmap-sV.txt
 ✅ Result Verification
 ✅ Host reachability confirmed via ARP + ICMP
@@ -168,6 +163,5 @@ How nmap -sV fingerprinting matches banner data in packets
 Why exposed services (WinRM, SMB, LDAP) matter in attack surface mapping
 
 yaml
-Copy code
 
 ---
