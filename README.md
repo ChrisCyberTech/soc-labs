@@ -55,35 +55,39 @@ The goal is to learn how to collect, centralize, and analyze security logs in a 
 Each lab includes a reflection section:
 ```
 
-## Section	Purpose
-🚀 What I learned	Key takeaways and technical skills gained
-🔧 What broke	Issues and troubleshooting notes
-🔍 What I want to try next	Future improvements or follow-ups
+## 🧠 Learning Reflection Format (per lab)
 
-```📌 Roadmap
-Status	Lab	Focus Area
-✅	Lab 1	Sysmon local logging
-✅	Lab 2	Windows Event Forwarding (WEF)
-✅	Lab 3	Splunk SIEM ingestion
-✅	Lab 4	Network traffic analysis (Wireshark + Nmap)
-🔜	Lab 5	TBD (next lab)
-
-🧪 Future Ideas
-Threat hunting with Sigma rules
-
-Sysmon advanced config tuning
-
-PowerShell logging + SRUM artifacts
-
-Brute force + detection lab (RDP / WinRM)
-
-Active Directory attack paths (BloodHound)
-
-Incident response log workflow
-
-👤 Maintained by
-Chris Mejia — GitHub: ChrisCyberTech
-
-yaml
+| Section | Purpose |
+|---------|---------|
+| 🚀 **What I learned** | Key takeaways and technical skills gained |
+| 🔧 **What broke** | Issues, troubleshooting notes, and how I fixed them |
+| 🔍 **What I want to try next** | Future improvements, follow-ups, or experiments |
 
 ---
+
+## 📌 Roadmap
+
+| Status | Lab | Focus Area |
+|--------|-----|------------|
+| ✅ | Lab 1 | Sysmon local logging |
+| ✅ | Lab 2 | Windows Event Forwarding (WEF) |
+| ✅ | Lab 3 | Splunk SIEM ingestion |
+| ✅ | Lab 4 | Network traffic analysis (Wireshark + Nmap) |
+| 🔜 | Lab 5 | TBD (next lab) |
+
+---
+
+## 🧪 Future Ideas
+
+- Threat hunting with Sigma rules  
+- Sysmon advanced config tuning  
+- PowerShell logging + SRUM artifacts  
+- Brute force + detection lab (RDP / WinRM)  
+- Active Directory attack path mapping (BloodHound)  
+- Incident response log workflow and playbooks
+
+---
+
+## 👤 Maintained by
+
+**Chris Mejia** — GitHub: [ChrisCyberTech](https://github.com/ChrisCyberTech)
