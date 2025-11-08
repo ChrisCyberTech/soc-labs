@@ -53,6 +53,7 @@ The goal is to learn how to collect, centralize, and analyze security logs in a 
 └── README.md   ← main index file
 🧠 Learning Reflection Format (per lab)
 Each lab includes a reflection section:
+```
 
 Section	Purpose
 🚀 What I learned	Key takeaways and technical skills gained
@@ -84,6 +85,5 @@ Incident response log workflow
 Chris Mejia — GitHub: ChrisCyberTech
 
 yaml
-Copy code
 
 ---
