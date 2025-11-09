@@ -10,10 +10,10 @@ The goal is to learn how to collect, centralize, and analyze security logs in a 
 
 | Lab # | Title | Description |
 |-------|-------|-------------|
-| 1 | [Local Sysmon Setup](./soc-lab-1-sysmon) | Deployed Sysmon on Workstation01 and explored local event logging under `Microsoft-Windows-Sysmon/Operational` |
-| 2 | [WEF + Sysmon (Forwarding)](./soc-lab-2-wef) | Set up Windows Event Forwarding (WEF) from WORKSTATION01 to DC01 and validated via PowerShell + Event Viewer |
-| 3 | [Splunk SIEM Ingestion + Log Search](./soc-lab-3-splunk) | Installed Splunk, configured Universal Forwarder, ingested WEF logs, and searched EventIDs (4624, 4625, Sysmon 1) |
-| 4 | [Network Traffic Analysis (Wireshark + Nmap)](./soc-lab-4-wireshark-nmap) | Performed host discovery + SYN + service scans while capturing packets in Wireshark to validate open/closed ports |
+| 1 | [Local Sysmon Setup](./soc-lab-1-sysmon-setup) | Deployed Sysmon on Workstation01 and explored local event logging under `Microsoft-Windows-Sysmon/Operational` |
+| 2 | [WEF + Sysmon (Forwarding)](./soc-lab-2-wef-setup) | Set up Windows Event Forwarding (WEF) from WORKSTATION01 to DC01 and validated via PowerShell + Event Viewer |
+| 3 | [Splunk SIEM Ingestion + Log Search](./soc-lab-3-siem-wef) | Installed Splunk, configured Universal Forwarder, ingested WEF logs, and searched EventIDs (4624, 4625, Sysmon 1) |
+| 4 | [Network Traffic Analysis (Wireshark + Nmap)](./soc-lab-4-network-traffic-analysis) | Performed host discovery + SYN + service scans while capturing packets in Wireshark to validate open/closed ports |
 | 5 | [Incident Response & Windows Event Logs](./soc-lab-5-incident-response) | Simulated Windows endpoint attack, detected using Sysmon/WEF/Splunk, and documented investigation and containment flow |
 
 
