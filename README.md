@@ -79,7 +79,7 @@ Each lab includes a reflection section:
 | ✅ | Lab 2 | Windows Event Forwarding (WEF) |
 | ✅ | Lab 3 | Splunk SIEM ingestion |
 | ✅ | Lab 4 | Network traffic analysis (Wireshark + Nmap) |
-| 🔜 | Lab 5 | Endpoint Incident Response |
+| 🔜 | Lab 5 | Endpoint Incident Response (native Windows tools) |
 
 ---
 
