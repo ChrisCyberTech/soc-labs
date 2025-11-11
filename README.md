@@ -52,7 +52,7 @@ The goal is to learn how to collect, centralize, and analyze security logs in a 
 │   ├── README.md
 │   └── screenshots/
 │ 
-├── soc-lab-5-incident-response
+├── soc-lab-5-endpoint-incident-response
 │   ├── README.md
 │   └── screenshots/
 │
