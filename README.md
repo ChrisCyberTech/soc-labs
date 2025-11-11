@@ -14,7 +14,7 @@ The goal is to learn how to collect, centralize, and analyze security logs in a 
 | 2 | [WEF + Sysmon (Forwarding)](./soc-lab-2-wef-setup) | Set up Windows Event Forwarding (WEF) from WORKSTATION01 to DC01 and validated via PowerShell + Event Viewer |
 | 3 | [Splunk SIEM Ingestion + Log Search](./soc-lab-3-siem-wef) | Installed Splunk, configured Universal Forwarder, ingested WEF logs, and searched EventIDs (4624, 4625, Sysmon 1) |
 | 4 | [Network Traffic Analysis (Wireshark + Nmap)](./soc-lab-4-network-traffic-analysis) | Performed host discovery + SYN + service scans while capturing packets in Wireshark to validate open/closed ports |
-| 5 | [Endpoint Incident Response (Native Windows Tools)](./soc-lab-5-endpoint-ir) | Simulated Windows endpoint compromise; investigation, artifact collection, and containment performed using native Windows tools and portable utilities (no Sysmon / no WEF / no Splunk). |
+| 5 | [Endpoint Incident Response (Native Windows Tools)](./soc-lab-5-endpoint-ir) | Simulated Windows endpoint compromise; investigation, artifact collection, and containment performed using native Windows tools and portable utilities. |
 
 
 ---
