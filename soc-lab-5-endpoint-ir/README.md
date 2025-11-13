@@ -90,7 +90,6 @@ The malicious binary’s SHA-256 hash was generated for reference:
 8E1A3617EC1599E798FE8F3995B104D9D6D2E4B57099E44...
 
 yaml
-Copy code
 
 ![Hash of evil.exe](./screenshots/LAB5_08_hash_evil_exe.png)
 
