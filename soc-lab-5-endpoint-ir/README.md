@@ -36,90 +36,78 @@ Your role as the analyst is to:
 ## 🧾 Step-by-Step Investigation
 
 ### 1️⃣ Persistence Creation  
-The attacker executed the PowerShell script that created a scheduled task named **SysUpdateService** to maintain persistence.
-
-![Setup Persistence Success](./screenshots/LAB5_01_setup_persistence_success.png)
+The attacker executed the PowerShell script that created a scheduled task named **SysUpdateService** to maintain persistence.  
+![Setup Persistence Success](screenshots/LAB5_01_setup_persistence_success.png)
 
 ---
 
 ### 2️⃣ Verify Scheduled Task  
-Querying Windows Task Scheduler confirmed the malicious task’s presence and startup trigger.
-
-![Scheduled Tasks List](./screenshots/LAB5_02_schtasks_list.png)
+Querying Windows Task Scheduler confirmed the malicious task’s presence and startup trigger.  
+![Scheduled Tasks List](screenshots/LAB5_02_schtasks_list.png)
 
 ---
 
 ### 3️⃣ Enumerate Running Processes  
-A full verbose tasklist was captured to identify potential malicious activity.
-
-![Tasklist Processes](./screenshots/LAB5_03_tasklist_running_processes.png)
+A full verbose tasklist was captured to identify potential malicious activity.  
+![Tasklist Processes](screenshots/LAB5_03_tasklist_running_processes.png)
 
 ---
 
 ### 4️⃣ Network Connections  
-`netstat -ano` revealed multiple established external connections from the host.
-
-![Network Connections](./screenshots/LAB5_04_netstat_connections.png)
+`netstat -ano` revealed multiple established external connections from the host.  
+![Network Connections](screenshots/LAB5_04_netstat_connections.png)
 
 ---
 
 ### 5️⃣ Services Status  
-All Windows services were enumerated to confirm standard configurations and rule out rogue services.
-
-![Service List](./screenshots/LAB5_05_get_service_list.png)
+All Windows services were enumerated to confirm standard configurations and rule out rogue services.  
+![Service List](screenshots/LAB5_05_get_service_list.png)
 
 ---
 
 ### 6️⃣ Registry – System Run Key (HKLM)  
-Checked global startup entries. Only legitimate `SecurityHealthSystray.exe` was found.
-
-![HKLM Run Key](./screenshots/LAB5_06_reg_run_hklm.png)
+Checked global startup entries. Only legitimate `SecurityHealthSystray.exe` was found.  
+![HKLM Run Key](screenshots/LAB5_06_reg_run_hklm.png)
 
 ---
 
 ### 7️⃣ Registry – User Run Key (HKCU)  
-Confirmed standard user startup items (OneDrive, Edge).
-
-![HKCU Run Key](./screenshots/LAB5_07_reg_run_hkcu.png)
+Confirmed standard user startup items (OneDrive, Edge).  
+![HKCU Run Key](screenshots/LAB5_07_reg_run_hkcu.png)
 
 ---
 
 ### 8️⃣ Hash Suspicious Binary  
-The malicious binary’s SHA-256 hash was generated for reference:
-
+The malicious binary’s SHA-256 hash was generated for reference:  
 8E1A3617EC1599E798FE8F3995B104D9D6D2E4B57099E44...
 
 yaml
-
-![Hash of evil.exe](./screenshots/LAB5_08_hash_evil_exe.png)
+Copy code
+![Hash of evil.exe](screenshots/LAB5_08_hash_evil_exe.png)
 
 ---
 
 ### 9️⃣ Prefetch Check  
-No prefetch entry was found for `evil.exe`, suggesting it has not executed or Prefetch is disabled.
-
-![Prefetch Evidence](./screenshots/LAB5_09_prefetch_evidence.png)
+No prefetch entry was found for `evil.exe`, suggesting it has not executed or Prefetch is disabled.  
+![Prefetch Evidence](screenshots/LAB5_09_prefetch_evidence.png)
 
 ---
 
 ### 🔟 Security Event Logs  
-Recent Windows Security log entries (IDs 4624/4625/4800/4801) showed normal logon activity.
-
-![Security Event Log](./screenshots/LAB5_10_eventlog_security.png)
+Recent Windows Security log entries (IDs 4624/4625/4800/4801) showed normal logon activity.  
+![Security Event Log](screenshots/LAB5_10_eventlog_security.png)
 
 ---
 
 ### 1️⃣1️⃣ Artifact Collection  
-Collected process, network, service, and registry data to a forensic folder for analysis.
-
-![Artifact Collection Success](./screenshots/LAB5_11_collect_artifacts_success.png)
+Collected process, network, service, and registry data to a forensic folder for analysis.  
+![Artifact Collection Success](screenshots/LAB5_11_collect_artifacts_success.png)
 
 ---
 
 ### 1️⃣2️⃣ Artifact Import Verification  
-Verified that all evidence files were successfully gathered under `C:\Temp\forensics`.
-
-![Artifact Import Success](./screenshots/LAB5_12_import_artifacts_success.png)
+Verified that all evidence files were successfully gathered under `C:\Temp\forensics`.  
+![Artifact Import Success](screenshots/LAB5_12_import_artifacts_success.png)
 
 ---
 
