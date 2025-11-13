@@ -1,2 +1,16 @@
 TimeUTC,Source,Artifact,Description
 2025-11-10T21:05:00Z,WORKSTATION01,C:\Temp\evil\beacon.ps1,Scheduled task 'SysUpdateService' created to execute beacon
+| Timestamp        | System        | Action                   | Tool/Command                       | Result                                                       | Evidence                       |         |
+| ---------------- | ------------- | ------------------------ | ---------------------------------- | ------------------------------------------------------------ | ------------------------------ | ------- |
+| 2025-11-12 16:25 | WORKSTATION01 | Persistence created      | `setup_persistence.ps1`            | Task “SysUpdateService” created under C:\Temp\evil           | LAB5_01                        |         |
+| 2025-11-12 16:27 | WORKSTATION01 | Verified scheduled task  | `schtasks /query /v`               | Task active and ready                                        | LAB5_02                        |         |
+| 2025-11-12 16:30 | WORKSTATION01 | Collected process list   | `tasklist /v`                      | Normal system processes, no anomalies yet                    | LAB5_03                        |         |
+| 2025-11-12 16:31 | WORKSTATION01 | Checked network activity | `netstat -ano`                     | Multiple established TCP connections                         | LAB5_04                        |         |
+| 2025-11-12 16:33 | WORKSTATION01 | Collected service status | `Get-Service`                      | Normal Windows services running                              | LAB5_05                        |         |
+| 2025-11-12 16:34 | WORKSTATION01 | Checked HKLM Run key     | `reg query HKLM...Run`             | Legitimate entry only                                        | LAB5_06                        |         |
+| 2025-11-12 16:35 | WORKSTATION01 | Checked HKCU Run key     | `reg query HKCU...Run`             | Legitimate OneDrive/Edge entries                             | LAB5_07                        |         |
+| 2025-11-12 16:36 | WORKSTATION01 | File hash generated      | `Get-FileHash evil.exe`            | SHA-256 = 8E1A3617EC1599E798FE8F3995B104D9D6D2E4B57099E44... | LAB5_08                        |         |
+| 2025-11-12 16:37 | WORKSTATION01 | Searched Prefetch        | `dir C:\Windows\Prefetch           | findstr evil`                                                | No results (file not executed) | LAB5_09 |
+| 2025-11-12 16:38 | WORKSTATION01 | Reviewed Security logs   | `Get-EventLog Security -Newest 50` | 4624/4625 login events captured                              | LAB5_10                        |         |
+| 2025-11-12 16:42 | WORKSTATION01 | Collected artifacts      | `collect_artifacts.ps1`            | Data saved in C:\Temp\forensics                              | LAB5_11                        |         |
+| 2025-11-12 16:44 | WORKSTATION01 | Verified import          | PowerShell (Get-ChildItem)         | Artifacts validated (success)                                | LAB5_12                        |         |
