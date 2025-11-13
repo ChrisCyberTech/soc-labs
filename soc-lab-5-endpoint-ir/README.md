@@ -38,6 +38,8 @@ Your role as the analyst is to:
 ### 1️⃣ Persistence Creation  
 The attacker executed the PowerShell script that created a scheduled task named **SysUpdateService** to maintain persistence.  
 ![Setup Persistence Success](screenshots/LAB5_01_setup_persistence_success.png)
+![Setup Persistence Success](screenshots/LAB5_01_setup_persistence_success.png)
+
 
 ---
 
