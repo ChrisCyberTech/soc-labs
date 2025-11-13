@@ -3,3 +3,5 @@
 *.zip
 *.evtx
 *.pcap
+!/screenshots/
+!/screenshots/*.png
