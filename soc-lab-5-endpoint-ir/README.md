@@ -35,79 +35,131 @@ Your role as the analyst is to:
 
 ## 🧾 Step-by-Step Investigation
 
-### 1️⃣ Persistence Creation  
-The attacker executed the PowerShell script that created a scheduled task named **SysUpdateService** to maintain persistence.  
-![Setup Persistence Success](screenshots/LAB5_01_setup_persistence_success.png)
+> Tip: images are centered and scaled to fit GitHub.  
+> If you want them bigger/smaller, change `width="960"` below.
+
+### 1) Persistence Creation
+The attacker script created a scheduled task named **SysUpdateService** to maintain persistence.
+
+<p align="center">
+  <img src="screenshots/LAB5_01_setup_persistence_success.png" alt="SysUpdateService created by setup_persistence.ps1" width="960">
+</p>
 
 ---
 
-### 2️⃣ Verify Scheduled Task  
-Querying Windows Task Scheduler confirmed the malicious task’s presence and startup trigger.  
-![Scheduled Tasks List](screenshots/LAB5_02_schtasks_list.png)
+### 2) Verify Scheduled Task
+Windows Task Scheduler shows the malicious task is present and enabled.
+
+<p align="center">
+  <img src="screenshots/LAB5_02_schtasks_list.png" alt="schtasks output showing SysUpdateService" width="960">
+</p>
 
 ---
 
-### 3️⃣ Enumerate Running Processes  
-A full verbose tasklist was captured to identify potential malicious activity.  
-![Tasklist Processes](screenshots/LAB5_03_tasklist_running_processes.png)
+### 3) Enumerate Running Processes
+A full verbose task list was captured for situational awareness.
+
+<p align="center">
+  <img src="screenshots/LAB5_03_tasklist_running_processes.png" alt="tasklist /v output" width="960">
+</p>
 
 ---
 
-### 4️⃣ Network Connections  
-`netstat -ano` revealed multiple established external connections from the host.  
-![Network Connections](screenshots/LAB5_04_netstat_connections.png)
+### 4) Network Connections
+`netstat -ano` revealed established outbound connections from the host.
+
+<p align="center">
+  <img src="screenshots/LAB5_04_netstat_connections.png" alt="netstat -ano output" width="960">
+</p>
 
 ---
 
-### 5️⃣ Services Status  
-All Windows services were enumerated to confirm standard configurations and rule out rogue services.  
-![Service List](screenshots/LAB5_05_get_service_list.png)
+### 5) Services Status
+Enumerated Windows services to rule out rogue service persistence.
+
+<p align="center">
+  <img src="screenshots/LAB5_05_get_service_list.png" alt="Get-Service output" width="960">
+</p>
 
 ---
 
-### 6️⃣ Registry – System Run Key (HKLM)  
-Checked global startup entries. Only legitimate `SecurityHealthSystray.exe` was found.  
-![HKLM Run Key](screenshots/LAB5_06_reg_run_hklm.png)
+### 6) Registry – System Run Key (HKLM)
+Global startup entries checked; only legitimate entries present.
+
+<p align="center">
+  <img src="screenshots/LAB5_06_reg_run_hklm.png" alt="HKLM Run key query" width="960">
+</p>
 
 ---
 
-### 7️⃣ Registry – User Run Key (HKCU)  
-Confirmed standard user startup items (OneDrive, Edge).  
-![HKCU Run Key](screenshots/LAB5_07_reg_run_hkcu.png)
+### 7) Registry – User Run Key (HKCU)
+User startup entries confirmed as expected (OneDrive, Edge).
+
+<p align="center">
+  <img src="screenshots/LAB5_07_reg_run_hkcu.png" alt="HKCU Run key query" width="960">
+</p>
 
 ---
 
-### 8️⃣ Hash Suspicious Binary  
-The malicious binary’s SHA-256 hash was generated for reference:  
-8E1A3617EC1599E798FE8F3995B104D9D6D2E4B57099E44...
+### 8) Hash Suspicious Binary
+SHA-256 hash of `evil.exe` generated for reference and IOC sharing.
 
-yaml
-Copy code
-![Hash of evil.exe](screenshots/LAB5_08_hash_evil_exe.png)
-
----
-
-### 9️⃣ Prefetch Check  
-No prefetch entry was found for `evil.exe`, suggesting it has not executed or Prefetch is disabled.  
-![Prefetch Evidence](screenshots/LAB5_09_prefetch_evidence.png)
+<p align="center">
+  <img src="screenshots/LAB5_08_hash_evil_exe.png" alt="Get-FileHash for evil.exe" width="960">
+</p>
 
 ---
 
-### 🔟 Security Event Logs  
-Recent Windows Security log entries (IDs 4624/4625/4800/4801) showed normal logon activity.  
-![Security Event Log](screenshots/LAB5_10_eventlog_security.png)
+### 9) Prefetch Check
+No prefetch entry for `evil.exe` → likely not executed (or Prefetch disabled).
+
+<p align="center">
+  <img src="screenshots/LAB5_09_prefetch_evidence.png" alt="Prefetch search for evil.exe" width="960">
+</p>
 
 ---
 
-### 1️⃣1️⃣ Artifact Collection  
-Collected process, network, service, and registry data to a forensic folder for analysis.  
-![Artifact Collection Success](screenshots/LAB5_11_collect_artifacts_success.png)
+### 10) Security Event Logs
+Recent logon activity provides timeline context (4624/4625/4800/4801).
+
+<p align="center">
+  <img src="screenshots/LAB5_10_eventlog_security.png" alt="Security event log entries" width="960">
+</p>
 
 ---
 
-### 1️⃣2️⃣ Artifact Import Verification  
-Verified that all evidence files were successfully gathered under `C:\Temp\forensics`.  
-![Artifact Import Success](screenshots/LAB5_12_import_artifacts_success.png)
+### 11) Artifact Collection
+Collected process, network, service, and registry data for analysis.
+
+<p align="center">
+  <img src="screenshots/LAB5_11_collect_artifacts_success.png" alt="collect_artifacts.ps1 output" width="960">
+</p>
+
+---
+
+### 12) Artifact Import Verification
+Artifacts validated under `C:\Temp\forensics`.
+
+<p align="center">
+  <img src="screenshots/LAB5_12_import_artifacts_success.png" alt="Forensics folder contents verification" width="960">
+</p>
+
+## 📚 Screenshots Index
+
+| # | File |
+|---|------|
+| 1 | `LAB5_01_setup_persistence_success.png` |
+| 2 | `LAB5_02_schtasks_list.png` |
+| 3 | `LAB5_03_tasklist_running_processes.png` |
+| 4 | `LAB5_04_netstat_connections.png` |
+| 5 | `LAB5_05_get_service_list.png` |
+| 6 | `LAB5_06_reg_run_hklm.png` |
+| 7 | `LAB5_07_reg_run_hkcu.png` |
+| 8 | `LAB5_08_hash_evil_exe.png` |
+| 9 | `LAB5_09_prefetch_evidence.png` |
+| 10 | `LAB5_10_eventlog_security.png` |
+| 11 | `LAB5_11_collect_artifacts_success.png` |
+| 12 | `LAB5_12_import_artifacts_success.png` |
 
 ---
 
